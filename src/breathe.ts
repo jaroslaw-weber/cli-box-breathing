@@ -25,6 +25,17 @@ async function performBreathing(
 
       await sleep(1000); // Wait for 1 second
 
+      // Asks after every 60 seconds if the user is still present
+      // Only continues the exercise if the user acknowledges
+      if(session.time % 60 == 0 && session.time > 0) {
+        await prompt({
+            "type":"input",
+            "name":"present",
+            "message":"Are you still present? Hit enter: "
+          }
+        );
+      }
+
       session.time++;
       data.totalSecondsPracticed++;
       data.coins++;
